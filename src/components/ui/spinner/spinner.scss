@@ -1,0 +1,26 @@
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.spinner {
+	position: absolute;
+	box-sizing: border-box;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100%;
+	background-color: #000000a0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&_img {
+		width: 200px;
+		height: 200px;
+		background-size: cover;
+		background-image: url(./img/Spinner.svg);
+		animation: spinner 1.5s linear infinite;
+	}
+}
