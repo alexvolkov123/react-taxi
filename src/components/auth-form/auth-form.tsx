@@ -3,16 +3,17 @@ import { FieldValues, Path, SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../utils/form-config/form-config'
 import { AuthButton } from '../ui/buttons/auth-button/auth-button'
-import { FormInput } from '../ui/inputs/form-input/form-input'
-import './auth-form.css'
+import { FormInputWrapper } from '../ui/inputs/form-input-wrapper'
+import './auth-form.scss'
 import { AuthFormProps } from './props'
 
 export function AuthForm<T extends FieldValues, N extends Path<T>>({
-	title,
 	inputs,
 	validations,
 	onSubmit,
+	checkbox: children,
 	buttonLabel,
+	footer,
 }: AuthFormProps<T, N>) {
 	const {
 		register,
@@ -30,24 +31,30 @@ export function AuthForm<T extends FieldValues, N extends Path<T>>({
 	)
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(handleOnSubmit)} className='form'>
-				{inputs.map(input => (
-					<>
-						<FormInput
-							key={input.label}
-							{...{
-								register,
-								input,
-								validation: validations[input.name],
-								errors,
-							}}
-						/>
-					</>
-				))}
+		<div className='form'>
+			<div className='form__wrapper'>
+				<form onSubmit={handleSubmit(handleOnSubmit)}>
+					{inputs.map(input => (
+						<>
+							<FormInputWrapper
+								key={input.type}
+								{...{
+									register,
+									input,
+									validation: validations[input.name],
+									errors,
+									id: 'auth',
+								}}
+							/>
+						</>
+					))}
 
-				<AuthButton label={buttonLabel} disabled={!isValid} />
-			</form>
-		</>
+					{!!children && children}
+
+					<AuthButton label={buttonLabel} disabled={!isValid} />
+				</form>
+				{!!footer && footer}
+			</div>
+		</div>
 	)
 }

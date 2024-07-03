@@ -13,8 +13,13 @@ export type CarType = {
 export type User = {
 	email: string
 	password: string
+	keepMeLoggedIn: boolean
 	firstName: string
 	lastName: string
 	role: UserRolesType
 	car?: CarType
+}
+
+export type UserEmail = {
+	email: string
 }
