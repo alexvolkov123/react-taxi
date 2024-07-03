@@ -1,15 +1,16 @@
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { useMemo, useState } from 'react'
-
-import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { FieldValues, Path } from 'react-hook-form'
+
 import { FormInputProps } from '../form-input/form-input-props'
 
-export function FormInputPassword<T extends FieldValues, N extends Path<T>>({
+export function FormPasswordInput<T extends FieldValues, N extends Path<T>>({
 	register,
-	input: { label, name, type },
+	input: { label, name },
 	validation,
 	errors,
+	id,
 }: FormInputProps<T, N>) {
 	const [showPassword, setShowPassword] = useState(false)
 
@@ -38,6 +39,7 @@ export function FormInputPassword<T extends FieldValues, N extends Path<T>>({
 				),
 			}}
 			type={showPassword ? 'text' : 'password'}
+			id={id}
 		/>
 	)
 }

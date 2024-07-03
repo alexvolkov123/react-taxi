@@ -1,6 +1,6 @@
 export const buttonFontsSizes = {
 	authButton: {
-		fontSize: '38px',
+		fontSize: '26px',
 		fontWeight: 100,
 		textTransform: 'uppercase',
 		fontFamily: 'Roboto',
@@ -24,10 +24,10 @@ export const buttonFontsSizes = {
 
 export const buttonSizes = {
 	auth: {
-		width: '400px',
-		height: '80px',
-		borderRadius: '10px',
-		padding: '5px 0px 0px',
+		width: '300px',
+		height: '56px',
+		borderRadius: '5px',
+		paddingTop: '5px',
 		...buttonFontsSizes.authButton,
 	},
 	large: {
@@ -43,6 +43,13 @@ export const buttonSizes = {
 		borderRadius: '30px',
 		padding: '5px 0px 0px',
 		...buttonFontsSizes.mediumButton,
+	},
+	medium_auth: {
+		width: '165px',
+		height: '56px',
+		borderRadius: '5px',
+		padding: '5px 0px 0px',
+		...buttonFontsSizes.authButton,
 	},
 	small: {
 		width: '130px',

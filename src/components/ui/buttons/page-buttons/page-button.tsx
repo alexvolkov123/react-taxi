@@ -6,12 +6,13 @@ export const PageButton = ({
 	label,
 	size,
 	color,
+	disabled,
 	onClick,
 }: PageButtonProps) => {
 	const buttonId = useMemo(() => `${size}_${color}`, [color, size])
 
 	return (
-		<Button onClick={onClick} id={buttonId}>
+		<Button onClick={onClick} id={buttonId} disabled={disabled}>
 			{label}
 		</Button>
 	)

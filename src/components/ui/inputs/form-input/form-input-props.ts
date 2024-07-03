@@ -6,9 +6,6 @@ import {
 	UseFormRegister,
 } from 'react-hook-form'
 
-export type AuthInputs = 'email' | 'password' | 'username'
-export type CreateTaskInputs = 'title' | 'date' | 'description'
-
 export type InputType<N> = {
 	label?: string
 	name: N
@@ -20,4 +17,5 @@ export type FormInputProps<T extends FieldValues, N extends Path<T>> = {
 	input: InputType<N>
 	validation: RegisterOptions<T, N>
 	errors: FieldErrors<T>
+	id: string
 }

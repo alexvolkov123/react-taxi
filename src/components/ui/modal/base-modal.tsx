@@ -11,20 +11,12 @@ export const BaseModal = ({
 	return (
 		<Dialog onClose={onClose} open={open}>
 			{isCloseButton && (
-				<IconButton
-					onClick={onClose}
-					sx={{
-						position: 'absolute',
-						right: 0,
-						top: 0,
-						color: '#4a4a4a',
-					}}
-				>
+				<IconButton onClick={onClose} id='modal'>
 					<Close />
 				</IconButton>
 			)}
 
-			<DialogContent dividers>{children}</DialogContent>
+			<DialogContent>{children}</DialogContent>
 		</Dialog>
 	)
 }

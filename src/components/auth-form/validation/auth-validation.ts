@@ -13,19 +13,11 @@ const emailValidation = {
 const passwordValidation = {
 	required: 'Password is required',
 	validate: (value: string) => {
+		if (value.match(REG_LATIN))
+			return 'Password must contain only latin letters'
 		if (value.length < 8) return 'Password must be contain at least 8 letters'
 	},
 }
-const confirmPasswordValidation = {
-	required: 'Confirm password is required',
-	validate: (value: string) => {
-		if (value.length < 8) return 'Password must be contain at least 8 letters'
-	},
-}
-
-const textIsRequired = (name: string) => ({
-	required: `${name} is required`,
-})
 
 export const SignInInputValidations = {
 	email: emailValidation,
