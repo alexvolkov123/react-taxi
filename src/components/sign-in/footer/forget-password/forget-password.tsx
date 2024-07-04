@@ -3,6 +3,7 @@ import { IconButton, Typography } from '@mui/material'
 import { memo, useCallback, useMemo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { useActions } from '../../../../hooks/useActions'
 import { useResetPasswordMutation } from '../../../../store/api/reset-password.api'
 import { UserEmail } from '../../../../types/types'
 import { formConfig } from '../../../../utils/form-config/form-config'
@@ -23,17 +24,21 @@ export const ForgetPassword = memo(
 		} = useForm<UserEmail>(formConfig)
 
 		const [resetPassword] = useResetPasswordMutation()
+		const { toggleLoading } = useActions()
 
 		const handleOnSubmit: SubmitHandler<UserEmail> = useCallback(
 			(data: UserEmail) => {
+				toggleLoading()
 				resetPassword(data)
 					.then(() => {
+						toggleLoading()
 						notify(
 							`We have successfully sent a password reset
 							 link to your email address.`
 						)
 					})
 					.catch(() => {
+						toggleLoading()
 						notify(
 							`We were unable to send a link 
 							to your email address`,
@@ -43,7 +48,7 @@ export const ForgetPassword = memo(
 				onClose()
 				reset()
 			},
-			[onClose, reset, resetPassword]
+			[onClose, reset, resetPassword, toggleLoading]
 		)
 
 		const input = useMemo(
