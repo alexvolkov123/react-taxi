@@ -32,6 +32,7 @@ export const HeaderLinks = () => {
 					id='base'
 					items={languages}
 					selectedItem={language}
+					removeFirstOption={true}
 					onChange={handleChangeLanguage}
 				/>
 				{isOpen && <Link onClick={logout}>Log Out</Link>}
