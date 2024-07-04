@@ -11,7 +11,7 @@ export function AuthForm<T extends FieldValues, N extends Path<T>>({
 	inputs,
 	validations,
 	onSubmit,
-	checkbox: children,
+	checkbox,
 	buttonLabel,
 	footer,
 }: AuthFormProps<T, N>) {
@@ -49,7 +49,7 @@ export function AuthForm<T extends FieldValues, N extends Path<T>>({
 						</>
 					))}
 
-					{!!children && children}
+					{!!checkbox && checkbox}
 
 					<AuthButton label={buttonLabel} disabled={!isValid} />
 				</form>
