@@ -8,6 +8,7 @@ export const BaseSelect = ({
 	items,
 	selectedItem,
 	removeFirstOption = false,
+	menuProps,
 	onChange,
 }: BaseSelectProps) => {
 	const getMenuItemStyle = useCallback(
@@ -21,6 +22,7 @@ export const BaseSelect = ({
 			value={selectedItem}
 			onChange={e => onChange(e.target.value)}
 			id={id}
+			MenuProps={menuProps}
 		>
 			{items.map((item, index) => (
 				<MenuItem value={item} key={item} style={getMenuItemStyle(index)}>

@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useState } from 'react'
-
 import { Link } from '@mui/material'
+import { useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { RoutePathsEnum } from '../../../../router/routes/types'
+import { menuSettings } from '../../../../theme/component-settings/select/mui-menu-settings'
 import { BaseSelect } from '../../../ui/selects/base-select/base-select'
 import './header-links.scss'
 
@@ -33,6 +34,7 @@ export const HeaderLinks = () => {
 					items={languages}
 					selectedItem={language}
 					removeFirstOption={true}
+					menuProps={menuSettings}
 					onChange={handleChangeLanguage}
 				/>
 				{isOpen && <Link onClick={logout}>Log Out</Link>}

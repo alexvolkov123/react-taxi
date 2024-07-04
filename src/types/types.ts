@@ -23,3 +23,13 @@ export type User = {
 export type UserEmail = {
 	email: string
 }
+export type LoginRequest = {
+	email: string
+	password: string
+}
+
+export type LoginResponse = {
+	accessToken: string
+	expirationTime: number
+	refreshToken: string
+}

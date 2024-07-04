@@ -11,7 +11,7 @@ export function AuthForm<T extends FieldValues, N extends Path<T>>({
 	inputs,
 	validations,
 	onSubmit,
-	checkbox: children,
+	checkbox,
 	buttonLabel,
 	footer,
 }: AuthFormProps<T, N>) {
@@ -35,21 +35,19 @@ export function AuthForm<T extends FieldValues, N extends Path<T>>({
 			<div className='form__wrapper'>
 				<form onSubmit={handleSubmit(handleOnSubmit)}>
 					{inputs.map(input => (
-						<>
-							<FormInputWrapper
-								key={input.type}
-								{...{
-									register,
-									input,
-									validation: validations[input.name],
-									errors,
-									id: 'auth',
-								}}
-							/>
-						</>
+						<FormInputWrapper
+							key={input.type}
+							{...{
+								register,
+								input,
+								validation: validations[input.name],
+								errors,
+								id: 'auth',
+							}}
+						/>
 					))}
 
-					{!!children && children}
+					{!!checkbox && checkbox}
 
 					<AuthButton label={buttonLabel} disabled={!isValid} />
 				</form>

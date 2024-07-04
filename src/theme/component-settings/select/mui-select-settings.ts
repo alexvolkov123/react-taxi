@@ -4,15 +4,25 @@ export const muiSelectSettings = {
 			{
 				props: { id: 'base' },
 				style: {
-					width: 120,
+					width: 100,
 					height: 50,
+					fontFamily: 'Rasa',
+					fontSize: 20,
 					cursor: 'pointer',
 					color: 'white',
+
+					'.MuiInputBase-input.MuiOutlinedInput-input': {
+						padding: '3px 0 0 0',
+					},
+
 					fieldset: {
 						border: 'none',
 					},
-					li: {
-						backgroundColor: '#191919',
+
+					'.MuiSvgIcon-root': {
+						color: '#fff',
+						fontSize: 30,
+						right: 10,
 					},
 				},
 			},

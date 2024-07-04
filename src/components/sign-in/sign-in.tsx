@@ -1,6 +1,9 @@
 import { memo, useMemo } from 'react'
 
-import { User } from '../../types/types'
+import { useActions } from '../../hooks/useActions'
+import { useLoginMutation } from '../../store/api/login.api'
+import { LoginRequest } from '../../types/types'
+import { notify } from '../../utils/notify/notify'
 import { AuthForm } from '../auth-form/auth-form'
 import { AuthFormTitle } from '../auth-form/auth-form-title/auth-form-title'
 import { SignInInputValidations } from '../auth-form/validation/auth-validation'
@@ -10,6 +13,9 @@ import './sign-in.scss'
 import { InputType, SignInInputNamesType } from './types'
 
 export const SignInComponent = memo(() => {
+	const [login, { error, isError, isSuccess, isLoading }] = useLoginMutation({})
+	const { setLoading } = useActions()
+
 	const title = 'Sign In'
 	const inputs: InputType<SignInInputNamesType>[] = useMemo(
 		() => [
@@ -28,12 +34,25 @@ export const SignInComponent = memo(() => {
 	)
 	const buttonLabel = 'Login'
 
-	const onSubmit = () => {}
+	const onSubmit = (user: LoginRequest) => {
+		login(user)
+	}
+
+	isLoading && setLoading(true)
+
+	if (isError) {
+		setLoading(false)
+		notify('Something went wrong', 'error')
+	}
+	if (isSuccess) {
+		setLoading(false)
+		notify('You are logged in')
+	}
 
 	return (
 		<div className='signIn'>
 			<AuthFormTitle {...{ title }} />
-			<AuthForm<User, SignInInputNamesType>
+			<AuthForm<LoginRequest, SignInInputNamesType>
 				{...{
 					title,
 					inputs,
