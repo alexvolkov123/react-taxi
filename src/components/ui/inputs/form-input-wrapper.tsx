@@ -9,7 +9,6 @@ export function FormInputWrapper<T extends FieldValues, N extends Path<T>>(
 ) {
 	const getDesiredInput = () => {
 		const inputType = inputData.input.type
-		console.log(inputType)
 
 		if (inputType === 'password') {
 			return <FormPasswordInput {...inputData} />
