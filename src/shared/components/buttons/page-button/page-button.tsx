@@ -4,10 +4,10 @@ import { useMemo } from 'react'
 import { PageButtonProps } from './page-button.types'
 
 export const PageButton = ({ label, size, color, disabled, onClick }: PageButtonProps) => {
-  const buttonId = useMemo(() => `${size}_${color}`, [color, size])
+  const buttonClassName = useMemo(() => `${size}_${color}`, [color, size])
 
   return (
-    <Button onClick={onClick} id={buttonId} disabled={disabled}>
+    <Button onClick={onClick} className={buttonClassName} disabled={disabled}>
       {label}
     </Button>
   )
