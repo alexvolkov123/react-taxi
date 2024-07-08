@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
 import { AuthButton, CheckboxInput, FormWrapper, PasswordInput } from '../../../shared/components'
-import { LoginUser } from '../../../types/types'
+import { LoginUser } from '../../../shared/types'
 import { emailValidation, passwordValidation } from '../../../utils/validations'
 
 const defaultValues = {
