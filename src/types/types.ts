@@ -18,3 +18,8 @@ export type User = {
 	role: UserRolesType
 	car?: CarType
 }
+
+export type LoginUser = {
+	email: string
+	password: string
+}
