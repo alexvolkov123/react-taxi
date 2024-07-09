@@ -4,12 +4,10 @@ import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
-import { useActions } from '../../../hooks/useActions'
-import { useTypedSelector } from '../../../hooks/useTypedSelector'
-import { AuthButton } from '../../../shared/components/buttons/auth-button/auth-button'
-import { emailValidation } from '../../../shared/validations'
-import { useResetPasswordMutation } from '../../../store/api/reset-password.api'
-import { notify } from '../../../utils/notify/notify'
+import { useActions, useTypedSelector } from '../../../hooks'
+import { AuthButton, emailValidation } from '../../../shared'
+import { useResetPasswordMutation } from '../../../store'
+import { notify } from '../../../utils/notify'
 import './reset-password.scss'
 import { ResetPasswordRequest } from './reset-password.types'
 
@@ -47,7 +45,7 @@ export const ResetPassword = () => {
       toggleOpenResetPassword()
       reset()
     },
-    [reset, resetPassword, toggleLoading]
+    [reset, resetPassword, toggleLoading, toggleOpenResetPassword]
   )
 
   return (

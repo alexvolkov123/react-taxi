@@ -2,10 +2,15 @@ import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { rootActions } from '../store/actions/root-actions'
+import { loadingActions, resetPasswordActions } from '../store'
 
 export const useActions = () => {
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-	return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
+  const rootActions = {
+    ...loadingActions,
+    ...resetPasswordActions,
+  }
+
+  return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
 }
