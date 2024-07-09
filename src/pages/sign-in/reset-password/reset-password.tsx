@@ -20,28 +20,28 @@ export const ResetPassword = () => {
   } = useForm<ResetPasswordRequest>(formConfig)
 
   const [resetPassword] = useResetPasswordMutation()
+
   const { toggleLoading, toggleOpenResetPassword } = useActions()
   const { isOpenResetPassword } = useTypedSelector(state => state.resetPassword)
 
   const handleOnSubmit: SubmitHandler<ResetPasswordRequest> = useCallback(
-    (data: ResetPasswordRequest) => {
+    async (data: ResetPasswordRequest) => {
+      try {
+        toggleLoading()
+        await resetPassword(data).unwrap()
+        notify(
+          `We have successfully sent a password reset
+            link to your email address.`
+        )
+      } catch {
+        notify(
+          `We were unable to send a link 
+              to your email address`,
+          'error'
+        )
+      }
       toggleLoading()
-      resetPassword(data)
-        .then(() => {
-          toggleLoading()
-          notify(
-            `We have successfully sent a password reset
-							 link to your email address.`
-          )
-        })
-        .catch(() => {
-          toggleLoading()
-          notify(
-            `We were unable to send a link 
-							to your email address`,
-            'error'
-          )
-        })
+
       toggleOpenResetPassword()
       reset()
     },
