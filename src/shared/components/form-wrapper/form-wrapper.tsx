@@ -10,11 +10,11 @@ export const FormWrapper = ({
   footer,
 }: FormWrapperProps & PropsWithChildren) => {
   return (
-    <form onSubmit={onSubmit} className='form-wrapper'>
-      <Stack spacing={3}>
-        {children}
+    <>
+      <form onSubmit={onSubmit} className='form-wrapper'>
+        <Stack spacing={3}>{children}</Stack>
         {footer && footer}
-      </Stack>
-    </form>
+      </form>
+    </>
   )
 }

@@ -4,12 +4,17 @@ export const muiSelectSettings = {
       {
         props: { className: 'custom' },
         style: {
-          width: 120,
+          width: 110,
           height: 50,
           cursor: 'pointer',
+          boxSizing: 'border-box',
+          marginRight: 20,
           color: 'white',
           fieldset: {
             border: 'none',
+          },
+          svg: {
+            color: '#fff',
           },
           li: {
             backgroundColor: '#191919',

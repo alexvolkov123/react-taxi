@@ -3,9 +3,11 @@ import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
+
 import { AuthButton, CheckboxInput, FormWrapper, PasswordInput } from '../../../shared/components'
-import { LoginUser } from '../../../shared/types'
-import { emailValidation, passwordValidation } from '../../../utils/validations'
+import { LoginUserData } from '../../../shared/types'
+import { emailValidation, passwordValidation } from '../../../shared/validations'
+import { SignInFooter } from '../sign-in-footer'
 
 const defaultValues = {
   email: '',
@@ -18,17 +20,17 @@ export const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<LoginUser>({ ...formConfig, defaultValues })
+  } = useForm<LoginUserData>({ ...formConfig, defaultValues })
 
-  const onSubmit: SubmitHandler<LoginUser> = useCallback(
-    (data: LoginUser): void => {
+  const onSubmit: SubmitHandler<LoginUserData> = useCallback(
+    (data: LoginUserData): void => {
       reset()
     },
     [reset]
   )
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)} footer={<SignInFooter />}>
       <TextField
         {...register('email', emailValidation)}
         label='Email'

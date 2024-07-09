@@ -1,11 +1,11 @@
-import { PageButton } from '../../shared/components'
+import { ResetPassword } from './reset-password'
 import { SignInForm } from './sign-in-form'
 
 export const SignIn = () => {
   return (
     <>
       <SignInForm />
-      <PageButton label='Qwerty' size='large' color='purple' disabled={false} onClick={() => {}} />
+      <ResetPassword />
     </>
   )
 }

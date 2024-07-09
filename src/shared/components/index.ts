@@ -1,6 +1,7 @@
 export * from './buttons'
 export * from './form-wrapper'
 export * from './inputs'
+export * from './layout'
 export * from './modal'
 export * from './selects'
 export * from './spinner'

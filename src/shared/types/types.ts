@@ -20,7 +20,8 @@ export type User = {
   car?: CarType
 }
 
-export type LoginUser = {
+export type LoginUserData = {
   email: string
   password: string
 }
+
