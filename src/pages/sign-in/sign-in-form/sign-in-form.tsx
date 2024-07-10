@@ -3,9 +3,12 @@ import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
+import { useActions } from '../../../hooks'
 import { AuthButton, CheckboxInput, FormWrapper, PasswordInput } from '../../../shared/components'
-import { LoginUserData } from '../../../shared/types'
+import { LoginResponse, LoginUserData } from '../../../shared/types'
 import { emailValidation, passwordValidation } from '../../../shared/validations'
+import { useLoginMutation } from '../../../store'
+import { notify } from '../../../utils'
 import { SignInFooter } from '../sign-in-footer'
 
 const defaultValues = {
@@ -21,11 +24,25 @@ export const SignInForm = () => {
     formState: { errors, isValid },
   } = useForm<LoginUserData>({ ...formConfig, defaultValues })
 
+  const [login] = useLoginMutation()
+  const { toggleLoading } = useActions()
+
   const onSubmit: SubmitHandler<LoginUserData> = useCallback(
-    (data: LoginUserData): void => {
+    async (data: LoginUserData): Promise<LoginResponse | void> => {
+      try {
+        toggleLoading()
+        const tokens = await login(data).unwrap()
+
+        notify('You are logged in')
+
+        return tokens
+      } catch {
+        notify('Cannot find user with this email.', 'error')
+      }
+      toggleLoading()
       reset()
     },
-    [reset]
+    [login, reset, toggleLoading]
   )
 
   return (
