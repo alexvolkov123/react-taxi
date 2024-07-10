@@ -8,8 +8,8 @@ export const loadingSlice = createSlice({
   name: 'loading',
   initialState,
   reducers: {
-    setLoading: (state, { payload: isLoading }) => {
-      state.isLoading = isLoading
+    toggleLoading: state => {
+      state.isLoading = !state.isLoading
     },
   },
 })
