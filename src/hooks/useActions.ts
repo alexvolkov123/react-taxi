@@ -7,9 +7,12 @@ import { loadingActions } from '../store'
 export const useActions = () => {
   const dispatch = useDispatch()
 
-  const rootActions = {
-    ...loadingActions,
-  }
+  const rootActions = useMemo(
+    () => ({
+      ...loadingActions,
+    }),
+    []
+  )
 
-  return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
+  return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch, rootActions])
 }
