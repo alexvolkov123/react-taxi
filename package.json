@@ -55,8 +55,8 @@
     ]
   },
   "devDependencies": {
-    "@types/redux-logger": "^3.0.13",
-    "@types/webfontloader": "^1.6.38",
+    "globals": "^15.8.0",
+    "prettier": "^3.3.2",
     "sass": "^1.77.6"
   }
 }
