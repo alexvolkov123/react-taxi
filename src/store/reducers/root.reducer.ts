@@ -1,9 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
 import { api } from '../api/api'
-import { loadingReducer } from '../slices/loading.slice'
+import { authReducer, loadingReducer } from '../slices'
 
 export const rootReducer = combineReducers({
+  auth: authReducer,
   loading: loadingReducer,
   [api.reducerPath]: api.reducer,
 })

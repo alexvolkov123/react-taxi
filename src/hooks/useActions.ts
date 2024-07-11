@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { loadingActions } from '../store'
+import { authActions, loadingActions } from '../store'
 
 export const useActions = () => {
   const dispatch = useDispatch()
@@ -10,6 +10,7 @@ export const useActions = () => {
   const rootActions = useMemo(
     () => ({
       ...loadingActions,
+      ...authActions,
     }),
     []
   )
