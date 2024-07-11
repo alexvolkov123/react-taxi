@@ -20,8 +20,16 @@ export type User = {
   car?: CarType
 }
 
+export type UserEmail = {
+  email: string
+}
 export type LoginUserData = {
   email: string
   password: string
 }
 
+export type LoginResponse = {
+  accessToken: string
+  expirationTime: number
+  refreshToken: string
+}
