@@ -1,9 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { api } from '../api/api'
 
-import { loadingReducer, resetPasswordReducer } from '../slices'
+import { api } from '../api/api'
+import { authReducer, loadingReducer, resetPasswordReducer } from '../slices'
 
 export const rootReducer = combineReducers({
+  auth: authReducer,
   loading: loadingReducer,
   resetPassword: resetPasswordReducer,
   [api.reducerPath]: api.reducer,
