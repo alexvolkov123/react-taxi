@@ -1,3 +1,4 @@
+export * from './auth-form-title'
 export * from './buttons'
 export * from './form-wrapper'
 export * from './inputs'
