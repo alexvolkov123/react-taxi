@@ -8,6 +8,7 @@ export const BaseSelect = ({
   selectedItem,
   menuProps = {},
   isSelectedItemHidden,
+  label,
   onChange,
 }: BaseSelectProps) => {
   return (
@@ -15,6 +16,7 @@ export const BaseSelect = ({
       value={selectedItem}
       MenuProps={menuProps}
       onChange={e => onChange(e.target.value)}
+      label={label}
       className={className}
     >
       {items.map((item, index) => (
