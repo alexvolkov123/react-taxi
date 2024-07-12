@@ -37,7 +37,10 @@ export const SignUpForm = () => {
   } = useForm<RegisterUserData>({ ...formConfig, defaultValues })
 
   const selectItems = useMemo(
-    () => [UserRolesEnum.client, UserRolesEnum.driver],
+    () => [
+      { label: 'Client', value: UserRolesEnum.client },
+      { label: 'Driver', value: UserRolesEnum.driver },
+    ],
     []
   )
   const [selectedRole, setSelectedRole] = useState(UserRolesEnum.client)
