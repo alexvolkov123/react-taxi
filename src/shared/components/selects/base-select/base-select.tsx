@@ -13,17 +13,17 @@ export const BaseSelect = ({
   return (
     <Select
       value={selectedItem}
-      onChange={e => onChange(e.target.value)}
       MenuProps={menuProps}
+      onChange={e => onChange(e.target.value)}
       className={className}
     >
       {items.map((item, index) => (
         <MenuItem
-          value={item}
-          key={item}
+          value={item.value}
+          key={item.label}
           style={isSelectedItemHidden && !index ? { display: 'none' } : {}}
         >
-          {item}
+          {item.label}
         </MenuItem>
       ))}
     </Select>
