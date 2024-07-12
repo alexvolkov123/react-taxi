@@ -6,10 +6,16 @@ export const BaseSelect = ({
   className = 'base',
   items,
   selectedItem,
+  label,
   onChange,
 }: BaseSelectProps) => {
   return (
-    <Select value={selectedItem} onChange={e => onChange(e.target.value)} className={className}>
+    <Select
+      value={selectedItem}
+      label={label}
+      onChange={e => onChange(e.target.value)}
+      className={className}
+    >
       {items.map(item => (
         <MenuItem value={item.value} key={item.label}>
           {item.label}

@@ -4,6 +4,7 @@ export type BaseSelectProps = {
     label: string
     value: string
   }[]
+  label?: string
   selectedItem: string
   onChange: (value: string) => void
 }
