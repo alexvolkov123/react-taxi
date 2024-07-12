@@ -37,9 +37,9 @@ export type LoginResponse = {
 export type RegisterUserData = {
   email: string
   password: string
-  confirmPassword: string
+  confirmPassword?: string
   firstName: string
   lastName: string
   role: 'client' | 'driver'
-  car: CarType | null
+  car?: CarType
 }

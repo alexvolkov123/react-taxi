@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
 
+import { useActions } from '../../../hooks'
 import {
   AuthButton,
   FormWrapper,
@@ -15,6 +16,8 @@ import {
   emailValidation,
   passwordValidation,
 } from '../../../shared/validations'
+import { useRegisterUserMutation } from '../../../store'
+import { notify } from '../../../utils'
 import { CarForm } from './car-form'
 
 const defaultValues: RegisterUserData = {
@@ -24,7 +27,7 @@ const defaultValues: RegisterUserData = {
   firstName: '',
   lastName: '',
   role: 'client',
-  car: null,
+  car: undefined,
 }
 
 export const SignUpForm = () => {
@@ -37,6 +40,31 @@ export const SignUpForm = () => {
     trigger,
     formState: { errors, isValid, dirtyFields },
   } = useForm<RegisterUserData>({ ...formConfig, defaultValues })
+
+  const [registerUser] = useRegisterUserMutation()
+  const { toggleLoading } = useActions()
+
+  const onSubmit: SubmitHandler<RegisterUserData> = useCallback(
+    async (data: RegisterUserData) => {
+      const { car, confirmPassword, ...dataUser } = data
+      try {
+        toggleLoading()
+        await registerUser(dataUser).unwrap()
+        notify('You are registered')
+      } catch (error: any) {
+        let errorMessage = 'Cannot register you... Something’s wrong'
+        if (error) errorMessage = error.data.message
+        notify(errorMessage, 'error')
+      }
+      toggleLoading()
+      reset()
+    },
+    [registerUser, reset, toggleLoading]
+  )
+
+  useEffect(() => {
+    dirtyFields.confirmPassword && trigger('confirmPassword')
+  }, [dirtyFields.confirmPassword, watch('password'), trigger])
 
   const selectItems = useMemo(
     () => [
@@ -54,17 +82,6 @@ export const SignUpForm = () => {
     },
     [resetField]
   )
-
-  const onSubmit: SubmitHandler<RegisterUserData> = useCallback(
-    (data: RegisterUserData) => {
-      reset()
-    },
-    [reset]
-  )
-
-  useEffect(() => {
-    dirtyFields.confirmPassword && trigger('confirmPassword')
-  }, [dirtyFields.confirmPassword, watch('password'), trigger])
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
