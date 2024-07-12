@@ -9,7 +9,7 @@ export const BaseModal = ({
   onClose,
   children,
   isShowCloseButton = true,
-}: BaseModalProps & PropsWithChildren) => {
+}: PropsWithChildren<BaseModalProps>) => {
   return (
     <Dialog onClose={onClose} open={open}>
       {isShowCloseButton && (

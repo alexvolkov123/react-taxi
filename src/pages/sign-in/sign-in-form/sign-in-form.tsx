@@ -77,9 +77,9 @@ export const SignInForm = () => {
         <CheckboxInput onChange={value => {}} label='Keep me logged in' />
 
         <AuthButton label='login' disabled={!isValid} className='auth' />
-      </Stack>
 
-      <SignInFooter />
+        <SignInFooter />
+      </Stack>
     </FormWrapper>
   )
 }
