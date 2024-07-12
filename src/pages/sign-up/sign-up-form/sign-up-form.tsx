@@ -6,16 +6,15 @@ import { formConfig } from '../../../configs'
 
 import {
   AuthButton,
-  BaseSelect,
   FormWrapper,
   PasswordInput,
+  RoleSelect,
 } from '../../../shared/components'
 import { RegisterUserData, UserRolesEnum } from '../../../shared/types'
 import {
   emailValidation,
   passwordValidation,
 } from '../../../shared/validations'
-import { baseSelectMenuSettings } from '../../../theme'
 
 const defaultValues: RegisterUserData = {
   email: '',
@@ -43,7 +42,7 @@ export const SignUpForm = () => {
     ],
     []
   )
-  const [selectedRole, setSelectedRole] = useState(UserRolesEnum.client)
+  const [selectedRole, setSelectedRole] = useState('')
 
   const onChangeRole = useCallback(
     (value: string) => {
@@ -114,11 +113,19 @@ export const SignUpForm = () => {
             helperText={errors.lastName?.message}
             className='auth'
           />
-          <BaseSelect
-            items={selectItems}
-            selectedItem={selectedRole}
-            menuProps={baseSelectMenuSettings}
-            onChange={onChangeRole}
+          <RoleSelect
+            {...{
+              inputProps: {
+                register: register('role', { required: 'Role is required' }),
+                error: !!errors.role,
+                errorMessage: errors.role?.message,
+              },
+              baseSelectProps: {
+                items: selectItems,
+                selectedItem: selectedRole,
+                onChange: onChangeRole,
+              },
+            }}
           />
         </Stack>
 

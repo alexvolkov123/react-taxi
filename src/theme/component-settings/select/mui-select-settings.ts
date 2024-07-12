@@ -26,11 +26,24 @@ export const muiSelectSettings = {
           },
         },
       },
+      {
+        props: { className: 'base' },
+        style: {
+          color: '#000',
+          ':hover:not(.Mui-error) > :not(.Mui-error) ': {
+            borderColor: '#00A1E5',
+          },
+          ':hover:not(.Mui-error) ~ label': {
+            color: '#00A1E5',
+          },
+        },
+      },
     ],
     styleOverrides: {
       root: {
         width: 300,
         textAlign: 'left',
+        color: '#000',
       },
       icon: {
         fontSize: 40,
