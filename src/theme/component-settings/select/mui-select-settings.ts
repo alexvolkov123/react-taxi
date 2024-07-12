@@ -29,7 +29,7 @@ export const muiSelectSettings = {
     ],
     styleOverrides: {
       root: {
-        width: 200,
+        width: 300,
         textAlign: 'left',
       },
       icon: {

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useLanguages, useTypedSelector } from '../../../../../hooks'
 import { RoutePathsEnum } from '../../../../../router'
-import { menuSettings } from '../../../../../theme'
+import { customSelectMenuSettings } from '../../../../../theme'
 import { BaseSelect } from '../../../selects'
 import './header-links.scss'
 
@@ -26,7 +26,7 @@ export const HeaderLinks = () => {
         <BaseSelect
           className='custom'
           items={languages}
-          menuProps={menuSettings}
+          menuProps={customSelectMenuSettings}
           selectedItem={language}
           isSelectedItemHidden={true}
           onChange={handleChangeLanguage}
