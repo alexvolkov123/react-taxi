@@ -14,7 +14,11 @@ export const HeaderLinks = () => {
 
   const { userTokens } = useTypedSelector(state => state.auth)
 
-  const handleChangeLanguage = (value: string) => setLanguage(value)
+  const handleChangeLanguage = (value: string) =>
+    setLanguage({
+      label: value,
+      value,
+    })
 
   const logout = useCallback(() => {
     navigate(RoutePathsEnum.root)
@@ -27,7 +31,7 @@ export const HeaderLinks = () => {
           className='custom'
           items={languages}
           menuProps={customSelectMenuSettings}
-          selectedItem={language}
+          selectedItem={language.label}
           isSelectedItemHidden={true}
           onChange={handleChangeLanguage}
         />
