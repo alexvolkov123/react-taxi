@@ -1,7 +1,7 @@
-export type UserRolesType = {
-  client: 'client'
-  driver: 'driver'
-  admin: 'admin'
+export enum UserRolesEnum {
+  client = 'client',
+  driver = 'driver',
+  admin = 'admin',
 }
 export type CarType = {
   make: string
@@ -16,7 +16,7 @@ export type User = {
   keepMeLoggedIn: boolean
   firstName: string
   lastName: string
-  role: UserRolesType
+  role: UserRolesEnum
   car?: CarType
 }
 
@@ -32,4 +32,14 @@ export type LoginResponse = {
   accessToken: string
   expirationTime: number
   refreshToken: string
+}
+
+export type RegisterUserData = {
+  email: string
+  password: string
+  confirmPassword: string
+  firstName: string
+  lastName: string
+  role: 'client' | 'driver'
+  car: CarType | null
 }
