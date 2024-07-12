@@ -1,5 +1,5 @@
-import { Stack, TextField, Typography } from '@mui/material'
-import { useCallback, useMemo, useState } from 'react'
+import { Stack, TextField } from '@mui/material'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
@@ -15,6 +15,7 @@ import {
   emailValidation,
   passwordValidation,
 } from '../../../shared/validations'
+import { CarForm } from './car-form'
 
 const defaultValues: RegisterUserData = {
   email: '',
@@ -32,7 +33,9 @@ export const SignUpForm = () => {
     handleSubmit,
     reset,
     resetField,
-    formState: { errors, isValid },
+    watch,
+    trigger,
+    formState: { errors, isValid, dirtyFields },
   } = useForm<RegisterUserData>({ ...formConfig, defaultValues })
 
   const selectItems = useMemo(
@@ -58,6 +61,10 @@ export const SignUpForm = () => {
     },
     [reset]
   )
+
+  useEffect(() => {
+    dirtyFields.confirmPassword && trigger('confirmPassword')
+  }, [dirtyFields.confirmPassword, watch('password'), trigger])
 
   return (
     <FormWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +96,14 @@ export const SignUpForm = () => {
           </PasswordInput>
           <PasswordInput>
             <TextField
-              {...register('confirmPassword', passwordValidation)}
+              {...register('confirmPassword', {
+                ...passwordValidation,
+                validate: (value, formValues) => {
+                  if (formValues.password !== value) {
+                    return 'Passwords doesn`t match'
+                  }
+                },
+              })}
               label='Confirm password'
               variant='outlined'
               error={!!errors.confirmPassword}
@@ -130,43 +144,7 @@ export const SignUpForm = () => {
         </Stack>
 
         {selectedRole === UserRolesEnum.driver && (
-          <Stack spacing={3}>
-            <Typography fontSize={25} marginLeft={2}>
-              Car
-            </Typography>
-            <TextField
-              {...register('car.make', { required: 'This field is required' })}
-              label='Make'
-              variant='outlined'
-              error={!!errors.car?.make}
-              helperText={errors.car?.make?.message}
-              className='auth'
-            />
-            <TextField
-              {...register('car.model', { required: 'This field is required' })}
-              label='Model'
-              variant='outlined'
-              error={!!errors.car?.model}
-              helperText={errors.car?.model?.message}
-              className='auth'
-            />
-            <TextField
-              {...register('car.year', { required: 'This field is required' })}
-              label='Year'
-              variant='outlined'
-              error={!!errors.car?.year}
-              helperText={errors.car?.year?.message}
-              className='auth'
-            />
-            <TextField
-              {...register('car.color', { required: 'This field is required' })}
-              label='Color'
-              variant='outlined'
-              error={!!errors.car?.color}
-              helperText={errors.car?.color?.message}
-              className='auth'
-            />
-          </Stack>
+          <CarForm register={register} errors={errors} />
         )}
       </Stack>
       <AuthButton label='register' disabled={!isValid} className='auth' />

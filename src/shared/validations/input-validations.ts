@@ -11,3 +11,15 @@ export const passwordValidation = {
   pattern: { value: REG_LATIN, message: 'Invalid password' },
   minLength: { value: 8, message: 'Password must be longer' },
 }
+
+export const confirmPasswordValidation = (
+  value: string,
+  passwordValue: string
+) => ({
+  required: 'Confirm password is required',
+  pattern: { value: REG_LATIN, message: 'Invalid password' },
+  minLength: { value: 8, message: 'Password must be longer' },
+  validate: () => {
+    if (value !== passwordValue) return 'Password doesn`t match'
+  },
+})
