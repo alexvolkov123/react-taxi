@@ -1,12 +1,20 @@
-import { TextField } from '@mui/material'
+import { Stack, TextField } from '@mui/material'
 import { useCallback } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { formConfig } from '../../../configs'
 import { useActions } from '../../../hooks'
-import { AuthButton, CheckboxInput, FormWrapper, PasswordInput } from '../../../shared/components'
+import {
+  AuthButton,
+  CheckboxInput,
+  FormWrapper,
+  PasswordInput,
+} from '../../../shared/components'
 import { LoginUserData } from '../../../shared/types'
-import { emailValidation, passwordValidation } from '../../../shared/validations'
+import {
+  emailValidation,
+  passwordValidation,
+} from '../../../shared/validations'
 import { useLoginMutation } from '../../../store'
 import { notify } from '../../../utils'
 import { SignInFooter } from '../sign-in-footer'
@@ -45,29 +53,33 @@ export const SignInForm = () => {
   )
 
   return (
-    <FormWrapper onSubmit={handleSubmit(onSubmit)} footer={<SignInFooter />}>
-      <TextField
-        {...register('email', emailValidation)}
-        label='Email'
-        variant='outlined'
-        error={!!errors.email}
-        helperText={errors.email?.message}
-        className='auth'
-      />
-      <PasswordInput>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+      <Stack spacing={3}>
         <TextField
-          {...register('password', passwordValidation)}
-          label='Password'
+          {...register('email', emailValidation)}
+          label='Email'
           variant='outlined'
-          error={!!errors.password}
-          helperText={errors.password?.message}
+          error={!!errors.email}
+          helperText={errors.email?.message}
           className='auth'
         />
-      </PasswordInput>
+        <PasswordInput>
+          <TextField
+            {...register('password', passwordValidation)}
+            label='Password'
+            variant='outlined'
+            error={!!errors.password}
+            helperText={errors.password?.message}
+            className='auth'
+          />
+        </PasswordInput>
 
-      <CheckboxInput onChange={value => {}} label='Keep me logged in' />
+        <CheckboxInput onChange={value => {}} label='Keep me logged in' />
 
-      <AuthButton label='login' disabled={!isValid} className='auth' />
+        <AuthButton label='login' disabled={!isValid} className='auth' />
+      </Stack>
+
+      <SignInFooter />
     </FormWrapper>
   )
 }
