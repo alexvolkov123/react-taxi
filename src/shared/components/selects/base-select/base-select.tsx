@@ -11,8 +11,8 @@ export const BaseSelect = ({
   return (
     <Select value={selectedItem} onChange={e => onChange(e.target.value)} className={className}>
       {items.map(item => (
-        <MenuItem value={item} key={item}>
-          {item}
+        <MenuItem value={item.value} key={item.label}>
+          {item.label}
         </MenuItem>
       ))}
     </Select>
