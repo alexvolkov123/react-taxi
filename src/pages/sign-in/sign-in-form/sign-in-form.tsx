@@ -43,8 +43,10 @@ export const SignInForm = () => {
         setCredentials(userInfo)
 
         notify('You are logged in')
-      } catch {
-        notify('Cannot find user with this email.', 'error')
+      } catch (error: any) {
+        let errorMessage = 'Cannot find user with this email.'
+        if (error) errorMessage = error.data.message
+        notify(errorMessage, 'error')
       }
       toggleLoading()
       reset()
