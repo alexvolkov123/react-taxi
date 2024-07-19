@@ -1,9 +1,9 @@
-import { HeaderLinks } from './header-links'
+import { HeaderActions } from './header-actions';
 
-export const SiteHeader = () => {
-  return (
-    <div className='header'>
-      <HeaderLinks />
-    </div>
-  )
-}
+export const Header = () => {
+    return (
+        <div className='header'>
+            <HeaderActions />
+        </div>
+    );
+};

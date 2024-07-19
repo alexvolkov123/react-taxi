@@ -11,6 +11,9 @@ export const BaseSelect = ({
   label,
   onChange,
 }: BaseSelectProps) => {
+  const getMenuItemStyle = (value: string) =>
+    isSelectedItemHidden && selectedItem === value ? { display: 'none' } : {}
+
   return (
     <Select
       value={selectedItem}
@@ -19,12 +22,8 @@ export const BaseSelect = ({
       label={label}
       className={className}
     >
-      {items.map((item, index) => (
-        <MenuItem
-          value={item.value}
-          key={item.label}
-          style={isSelectedItemHidden && !index ? { display: 'none' } : {}}
-        >
+      {items.map(item => (
+        <MenuItem value={item.value} key={item.label} style={getMenuItemStyle(item.value)}>
           {item.label}
         </MenuItem>
       ))}
