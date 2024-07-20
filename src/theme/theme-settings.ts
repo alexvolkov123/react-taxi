@@ -1,9 +1,11 @@
 import { ThemeOptions } from '@mui/material';
+
 import {
     muiButtonSettings,
     muiHelperTextSettings,
     muiIconButtonSettings,
     muiLinkSettings,
+    muiPaperSettings,
     muiSelectSettings,
     muiTextFieldSettings,
 } from './component-settings';
@@ -16,19 +18,7 @@ export const themeSettings = {
         },
     },
     components: {
-        MuiPaper: {
-            variants: [
-                {
-                    props: { className: 'sign-in__footer' },
-                    style: {
-                        boxShadow: 'none',
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                    },
-                },
-            ],
-        },
+        ...muiPaperSettings,
         ...muiButtonSettings,
         ...muiTextFieldSettings,
         ...muiHelperTextSettings,

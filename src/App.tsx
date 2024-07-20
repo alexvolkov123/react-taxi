@@ -1,23 +1,20 @@
 import { ThemeProvider } from '@emotion/react';
 import { RouterProvider } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { notifyProps } from './configs';
-import { SpinnerProvider } from './providers';
+import { Provider } from 'react-redux';
 import { router } from './router';
+import { store } from './store';
 import { useTheme } from './theme';
 
 export const App = () => {
-    const { theme } = useTheme();
+    const theme = useTheme();
 
     return (
-        <ThemeProvider theme={theme}>
-            <SpinnerProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
                 <RouterProvider router={router} />
-            </SpinnerProvider>
-
-            <ToastContainer {...notifyProps} />
-        </ThemeProvider>
+            </ThemeProvider>
+        </Provider>
     );
 };
