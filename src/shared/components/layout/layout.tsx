@@ -1,12 +1,21 @@
-import { PropsWithChildren } from 'react'
-import { SiteHeader } from './header/header'
-import './layout.scss'
+import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-export const Layout = ({ children }: PropsWithChildren) => {
-  return (
-    <div className='layout'>
-      <SiteHeader />
-      <div className='layout__body'>{children}</div>
-    </div>
-  )
-}
+import { notifyProps } from '../../../configs';
+import { SpinnerProvider } from '../../../providers';
+import { Header } from './header';
+import './layout.scss';
+
+export const Layout = () => {
+    return (
+        <div className='layout'>
+            <Header />
+            <div className='layout__body'>
+                <SpinnerProvider>
+                    <Outlet />
+                </SpinnerProvider>
+            </div>
+            <ToastContainer {...notifyProps} />
+        </div>
+    );
+};
