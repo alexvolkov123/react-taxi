@@ -6,7 +6,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { formConfig } from '../../../configs';
 import { useActions, useTypedSelector } from '../../../hooks';
 import { AuthButton, emailValidation } from '../../../shared';
-import { useResetPasswordMutation } from '../../../store';
+import { resetPasswordSelector, useResetPasswordMutation } from '../../../store';
+import { handleError } from '../../../utils';
 import { notify } from '../../../utils/notify';
 import './reset-password.scss';
 import { ResetPasswordRequest } from './reset-password.types';
@@ -21,8 +22,8 @@ export const ResetPassword = () => {
 
     const [resetPassword] = useResetPasswordMutation();
 
-    const { setLoading, toggleOpenResetPassword } = useActions();
-    const { isOpenResetPassword } = useTypedSelector(state => state.resetPassword);
+    const { setLoading, setOpenResetPassword } = useActions();
+    const { isOpenResetPassword } = useTypedSelector(resetPasswordSelector);
 
     const handleOnSubmit: SubmitHandler<ResetPasswordRequest> = useCallback(
         async (data: ResetPasswordRequest) => {
@@ -31,28 +32,24 @@ export const ResetPassword = () => {
                 await resetPassword(data).unwrap();
                 notify(
                     `We have successfully sent a password reset
-            link to your email address.`,
+                    link to your email address.`,
                 );
-            } catch {
-                notify(
-                    `We were unable to send a link 
-              to your email address`,
-                    'error',
-                );
+            } catch (error: any) {
+                notify(handleError(error), 'error');
             }
             setLoading(false);
+            setOpenResetPassword(false);
 
-            toggleOpenResetPassword();
             reset();
         },
-        [reset, resetPassword, setLoading, toggleOpenResetPassword],
+        [reset, resetPassword, setLoading, setOpenResetPassword],
     );
 
     return (
         <>
             {isOpenResetPassword && (
                 <div className='reset-password'>
-                    <IconButton onClick={() => toggleOpenResetPassword()} className='modal'>
+                    <IconButton onClick={() => setOpenResetPassword(false)} className='modal'>
                         <Close />
                     </IconButton>
                     <Typography width={500} fontSize={18}>

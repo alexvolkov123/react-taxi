@@ -1,17 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  isOpenResetPassword: false,
-}
+    isOpenResetPassword: false,
+};
 
 export const resetPasswordSlice = createSlice({
-  name: 'resetPassword',
-  initialState,
-  reducers: {
-    toggleOpenResetPassword: state => {
-      state.isOpenResetPassword = !state.isOpenResetPassword
+    name: 'resetPassword',
+    initialState,
+    reducers: {
+        setOpenResetPassword: (state, { payload }: PayloadAction<boolean>) => {
+            state.isOpenResetPassword = payload;
+        },
     },
-  },
-})
+});
 
-export const { actions: resetPasswordActions, reducer: resetPasswordReducer } = resetPasswordSlice
+export const { actions: resetPasswordActions, reducer: resetPasswordReducer } = resetPasswordSlice;

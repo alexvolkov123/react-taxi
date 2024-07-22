@@ -6,13 +6,13 @@ import { RoutePathsEnum } from '../../../router';
 
 export const SignInFooter = () => {
     const navigate = useNavigate();
-    const { toggleOpenResetPassword } = useActions();
+    const { setOpenResetPassword } = useActions();
 
     const navigateToRegister = () => navigate(RoutePathsEnum.signUp);
 
     return (
         <Paper className='sign-in__footer'>
-            <Link onClick={() => toggleOpenResetPassword()} className='auth'>
+            <Link onClick={() => setOpenResetPassword(true)} className='auth'>
                 Forgot password?
             </Link>
             <Link onClick={navigateToRegister} className='auth'>
