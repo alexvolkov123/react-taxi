@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import { SignIn, SignUp } from '../pages';
 import { Layout } from '../shared';
@@ -9,6 +9,10 @@ export const router = createBrowserRouter([
         path: RoutePathsEnum.root,
         element: <Layout />,
         children: [
+            {
+                path: RoutePathsEnum.root,
+                element: <Navigate to={RoutePathsEnum.signIn} />,
+            },
             {
                 path: RoutePathsEnum.signIn,
                 element: <SignIn />,
