@@ -7,9 +7,9 @@ import { formConfig } from '../../../configs';
 import { useActions } from '../../../hooks';
 import { AuthButton, AuthFormWrapper, PasswordInput, RoleSelect } from '../../../shared/components';
 import { RegisterUserData, UserRolesEnum } from '../../../shared/types';
-import { emailValidation, passwordValidation } from '../../../shared/validations';
+import { emailValidation, passwordValidation, requiredFieldValidation } from '../../../shared/validations';
 import { useRegisterUserMutation } from '../../../store';
-import { notify } from '../../../utils';
+import { handleError, notify } from '../../../utils';
 import { CarForm } from './car-form';
 
 const defaultValues: RegisterUserData = {
@@ -44,11 +44,10 @@ export const SignUpForm = () => {
                 await registerUser(dataUser).unwrap();
                 notify('You are registered');
             } catch (error: any) {
-                let errorMessage = 'Cannot register you... Something’s wrong';
-                if (error) errorMessage = error.data.message;
-                notify(errorMessage, 'error');
+                notify(handleError(error), 'error');
             }
             setLoading(false);
+
             reset();
         },
         [registerUser, reset, setLoading],
@@ -72,6 +71,7 @@ export const SignUpForm = () => {
     const onChangeRole = useCallback(
         (value: string) => {
             setSelectedRole(value as UserRolesEnum);
+
             resetField('car');
         },
         [resetField],
@@ -105,7 +105,7 @@ export const SignUpForm = () => {
                                 ...passwordValidation,
                                 validate: (value, formValues) => {
                                     if (formValues.password !== value) {
-                                        return 'Passwords doesn`t match';
+                                        return 'Password doesn`t match';
                                     }
                                 },
                             })}
@@ -117,7 +117,7 @@ export const SignUpForm = () => {
                         />
                     </PasswordInput>
                     <TextField
-                        {...register('firstName', { required: 'This field is required' })}
+                        {...register('firstName', requiredFieldValidation('First name'))}
                         label='First name'
                         variant='outlined'
                         error={!!errors.firstName}
@@ -125,7 +125,7 @@ export const SignUpForm = () => {
                         className='auth'
                     />
                     <TextField
-                        {...register('lastName', { required: 'This field is required' })}
+                        {...register('lastName', requiredFieldValidation('Last name'))}
                         label='Last name'
                         variant='outlined'
                         error={!!errors.lastName}
@@ -135,7 +135,7 @@ export const SignUpForm = () => {
                     <RoleSelect
                         {...{
                             inputProps: {
-                                register: register('role', { required: 'Role is required' }),
+                                register: register('role', requiredFieldValidation('Role')),
                                 error: !!errors.role,
                                 errorMessage: errors.role?.message,
                             },
