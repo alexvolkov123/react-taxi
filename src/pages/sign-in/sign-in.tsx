@@ -1,11 +1,12 @@
-import { PageButton } from '../../shared/components'
+import { AuthFormTitle } from '../../shared/components'
 import { SignInForm } from './sign-in-form'
+import './sign-in.scss'
 
 export const SignIn = () => {
   return (
-    <>
+    <div className='sign-in'>
+      <AuthFormTitle title='Sign In' />
       <SignInForm />
-      <PageButton label='Qwerty' size='large' color='purple' disabled={false} onClick={() => {}} />
-    </>
+    </div>
   )
 }

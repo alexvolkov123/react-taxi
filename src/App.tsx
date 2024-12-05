@@ -1,15 +1,20 @@
-import { ThemeProvider } from '@emotion/react'
-import { RouterProvider } from 'react-router-dom'
+import { ThemeProvider } from '@emotion/react';
+import { RouterProvider } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { router } from './router/router'
-import { useTheme } from './theme/useTheme'
+import { Provider } from 'react-redux';
+import { router } from './router';
+import { store } from './store';
+import { useTheme } from './theme';
 
 export const App = () => {
-	const { theme } = useTheme()
+    const theme = useTheme();
 
-	return (
-		<ThemeProvider theme={theme}>
-			<RouterProvider router={router} />
-		</ThemeProvider>
-	)
-}
+    return (
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </Provider>
+    );
+};

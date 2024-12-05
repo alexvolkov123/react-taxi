@@ -6,5 +6,7 @@ export type BaseSelectProps = {
   }[]
   label?: string
   selectedItem: string
+  menuProps?: object
+  isSelectedItemHidden?: boolean
   onChange: (value: string) => void
 }
