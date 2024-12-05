@@ -1,0 +1,74 @@
+import { Close } from '@mui/icons-material';
+import { IconButton, TextField, Typography } from '@mui/material';
+import { useCallback } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
+import { formConfig } from '../../../configs';
+import { useActions, useTypedSelector } from '../../../hooks';
+import { AuthButton, emailValidation } from '../../../shared';
+import { resetPasswordSelector, useResetPasswordMutation } from '../../../store';
+import { handleError } from '../../../utils';
+import { notify } from '../../../utils/notify';
+import './reset-password.scss';
+import { ResetPasswordRequest } from './reset-password.types';
+
+export const ResetPassword = () => {
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isValid },
+    } = useForm<ResetPasswordRequest>(formConfig);
+
+    const [resetPassword] = useResetPasswordMutation();
+
+    const { setLoading, setOpenResetPassword } = useActions();
+    const { isOpenResetPassword } = useTypedSelector(resetPasswordSelector);
+
+    const handleOnSubmit: SubmitHandler<ResetPasswordRequest> = useCallback(
+        async (data: ResetPasswordRequest) => {
+            setLoading(true);
+            try {
+                await resetPassword(data).unwrap();
+                notify(
+                    `We have successfully sent a password reset
+                    link to your email address.`,
+                );
+            } catch (error: any) {
+                notify(handleError(error), 'error');
+            }
+            setLoading(false);
+            setOpenResetPassword(false);
+
+            reset();
+        },
+        [reset, resetPassword, setLoading, setOpenResetPassword],
+    );
+
+    return (
+        <>
+            {isOpenResetPassword && (
+                <div className='reset-password'>
+                    <IconButton onClick={() => setOpenResetPassword(false)} className='modal'>
+                        <Close />
+                    </IconButton>
+                    <Typography width={500} fontSize={18}>
+                        We need to know your email to send the link to reset you password.
+                    </Typography>
+                    <form onSubmit={handleSubmit(handleOnSubmit)} className='reset-password__form'>
+                        <TextField
+                            {...register('email', emailValidation)}
+                            label='Email'
+                            variant='outlined'
+                            error={!!errors.email}
+                            helperText={errors.email?.message}
+                            className='auth'
+                        />
+
+                        <AuthButton label='Send' className='medium_auth' disabled={!isValid} />
+                    </form>
+                </div>
+            )}
+        </>
+    );
+};

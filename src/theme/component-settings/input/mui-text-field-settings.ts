@@ -5,6 +5,8 @@ export const muiTextFieldSettings = {
         props: { className: 'auth' },
         style: {
           marginBottom: 20,
+          backgroundColor: '#fff',
+          borderRadius: 5,
           width: 300,
           ':hover > :not(.Mui-error) ': {
             color: '#00A1E5',
