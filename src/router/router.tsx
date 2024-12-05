@@ -1,11 +1,12 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { SignIn } from '../pages';
+import { SignIn, SignUp } from '../pages';
 import { Layout } from '../shared';
 import { RoutePathsEnum } from './router.types';
 
 export const router = createBrowserRouter([
     {
+        path: RoutePathsEnum.root,
         element: <Layout />,
         children: [
             {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
             {
                 path: RoutePathsEnum.signIn,
                 element: <SignIn />,
+            },
+            {
+                path: RoutePathsEnum.signUp,
+                element: <SignUp />,
             },
         ],
     },

@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -46,29 +46,32 @@ export const SignInForm = () => {
     );
 
     return (
-        <AuthFormWrapper onSubmit={handleSubmit(onSubmit)} footer={<SignInFooter />}>
-            <TextField
-                {...register('email', emailValidation)}
-                label='Email'
-                variant='outlined'
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                className='auth'
-            />
-            <PasswordInput>
+        <AuthFormWrapper onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={3}>
                 <TextField
-                    {...register('password', passwordValidation)}
-                    label='Password'
+                    {...register('email', emailValidation)}
+                    label='Email'
                     variant='outlined'
-                    error={!!errors.password}
-                    helperText={errors.password?.message}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
                     className='auth'
                 />
-            </PasswordInput>
+                <PasswordInput>
+                    <TextField
+                        {...register('password', passwordValidation)}
+                        label='Password'
+                        variant='outlined'
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                        className='auth'
+                    />
+                </PasswordInput>
 
-            <CheckboxInput onChange={value => {}} label='Keep me logged in' />
+                <CheckboxInput onChange={value => {}} label='Keep me logged in' />
 
-            <AuthButton label='login' disabled={!isValid} className='auth' />
+                <AuthButton label='login' disabled={!isValid} className='auth' />
+            </Stack>
+            <SignInFooter />
         </AuthFormWrapper>
     );
 };

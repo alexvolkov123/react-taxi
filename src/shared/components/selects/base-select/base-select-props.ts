@@ -1,12 +1,15 @@
+import { UseFormRegisterReturn } from 'react-hook-form'
+
+import { SelectItem } from '../selects.types'
+
 export type BaseSelectProps = {
   className?: 'base' | 'custom'
-  items: {
-    label: string
-    value: string
-  }[]
+  labelId?: string
   label?: string
-  selectedItem: string
-  menuProps?: object
+  items: SelectItem[]
   isSelectedItemHidden?: boolean
+  register?: UseFormRegisterReturn<'role'>
+  selectedItem?: string
+  menuProps?: object
   onChange: (value: string) => void
 }

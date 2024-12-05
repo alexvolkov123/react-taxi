@@ -33,3 +33,13 @@ export type LoginResponse = {
     expirationTime: number;
     refreshToken: string;
 };
+
+export type RegisterUserData = {
+    email: string;
+    password: string;
+    confirmPassword?: string;
+    firstName: string;
+    lastName: string;
+    role: 'client' | 'driver';
+    car?: CarType;
+};

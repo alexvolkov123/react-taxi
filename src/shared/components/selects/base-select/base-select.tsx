@@ -8,6 +8,8 @@ export const BaseSelect = ({
   selectedItem,
   menuProps = {},
   isSelectedItemHidden,
+  labelId,
+  register,
   label,
   onChange,
 }: BaseSelectProps) => {
@@ -16,9 +18,11 @@ export const BaseSelect = ({
 
   return (
     <Select
+      {...register}
       value={selectedItem}
       MenuProps={menuProps}
       onChange={e => onChange(e.target.value)}
+      labelId={labelId}
       label={label}
       className={className}
     >
